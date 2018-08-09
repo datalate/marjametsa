@@ -1,0 +1,4 @@
+Avaimet:
+objective - tavoite. 0 tarkoittaa kaikkien vihollisten tuhoamista
+randomEnemiesMin - kuinka paljon satunnaisia vihollisia on minimissään
+randomEnemiesMax - kuinka paljon satunnaisia vihollisia on maksimissaan

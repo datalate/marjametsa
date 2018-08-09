@@ -1,0 +1,149 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage[finnish]{babel}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Linux Libertine O}
+
+\begin{document}
+\title{Marjametsä park\\\small{Suunnitteludokumentti}}
+\author{Sakari Saarinen, Lauri Haavisto, Esa Lakaniemi}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Alkusanat}
+Harjoitustyössä on tarkoitus tuottaa Syndicate-pelin inspiroimana peli, jossa
+valloitetaan vihollisen hallitsemia alueita --- tässä tapauksessa tosin Tampereen
+parkkihalleja, ei koko maailmaa.
+
+\section{Käyttöliittymä}
+
+Käyttöliittymän peliruutu toteutetaan Qt:n QGraphicsView -näkymään
+piirrettävillä ns. ``spriteilla''. Sivupalkin käyttöliittymä totetetaan
+QML-kielen avulla. Sekä peliruudulla että sivupalkin käyttöliittymällä on kaksi
+eri näkymää: Tampere-näkymä sekä parkkihallinäkymä.
+
+\subsection{Tampere-näkymä}
+
+Tampere-näkymässä peliruutu näyttää kartan Tampereen keskustasta, johon on
+merkitty parkkihallit (Näistä lisää Pelimekaniikka-osiossa). Parkkihallit on
+merkitty pysäköintialueen liikennemerkkiä muistuttavalla P-merkillä.
+
+Sivupalkin käyttöliittymässä näytetään valitun parkkihallin tiedot
+(mm.\ vihollistilanne) ja painike, josta voidaan aloittaa tehtävä parkkihallissa.
+Lisäksi sivupalkissa näytetään pelaajan käytettävissä olevat aseet ja varusteet.
+
+\subsection{Parkkihallinäkymä}
+
+Parkkihallinäkymässä peliruutu näyttää dimetrisen yläviistosta kuvatun näkymän
+parkkihallin sisätilasta, jossa pelihahmot liikkuvat. Päähahmoa voidaan
+liikuttaa klikkaamalla lattiaruutuja ja pelihahmon asetta käytetään klikkaamalla
+vihollista.
+
+Sivupalkin käyttöliittymässä näytetään pelaajan päähahmon ja apurien tiedot
+(mm.\ osumapisteet sekä nykyinen ase). Lisäksi sivupalkissa näytetään pelaajan
+käytettävissä olevat aseet ja varusteet.
+
+\section{Pelimekaniikka}
+
+\subsection{Pelin kulku}
+Pelissä pelaaja valitsee Tampereen kartalta parkkihallin ja aloittaa siellä
+tehtävän. Itse tehtävä sisältää suurimman osan pelimekaniikasta.
+
+Tehtävässä pelaajalla on käytössään päähahmo sekä kolme tekoälyn ohjastamaa
+apuria. Kaikilla hahmoilla on käytössään aseita ja varusteita (ks.\ alaosio
+``Varusteet''). Näiden avulla pelaajan tulee suorittaa parkkihallissa oleva
+tehtävä, joka voi olla kaikkien vihollisten tuhoaminen, hallissa olevan
+resurssin kerääminen tai näiden yhdistelmä.
+
+Suoritettuaan tehtävän parkkihalli siirtyy pelaajan hallintaan eikä siellä enää
+ole vihollisia. Valloitettuaan näin kaikki parkkihallit pelaaja voittaa pelin.
+
+Tarkempaa kuvausta varten ks.\ alaosio ``Parkkihallit''.
+
+\subsection{Parkkihallit}
+Tärkeä osa peliä ovat parkkihallit, joissa varsinaiset tehtävät tapahtuvat.
+Kussakin parkkihallissa suoritetaan tehtävä, jonka tavoite on joko kaikkien
+vihollisten tuhoaminen, hallissa olevan resurssin kerääminen taikka molemmat.
+Tehtävän suoritettuaan pelaaja on valloittanut parkkihallin viholliselta
+itselleen.
+
+Kaikki keskustan parkkihallit valloitettuaan pelaajan tulee vielä valloittaa
+Hervannassa sijaitseva viimeinen parkkihalli voittaakseen pelin.
+
+Valitsimme (pääasiassa niiden sijainnin takia) 7 parkkihallia peliä varten.
+Parkkihallit FinnParkin tunnisteineen ovat:
+\begin{enumerate}
+    \item FNPK.13 Hervanta (Joka toimii loppuvihollisen sijaintina)
+    \item FNPK.12 Tullintori
+    \item FNPK.4 Tampere-talo
+    \item TRE.48 Sokos
+    \item FNPK.25 P-Hämppi
+    \item FNPK.1 Anttila
+    \item FNPK.16 Koskenparkki
+\end{enumerate}
+
+Parkkihalleista lisää osiossa ``Avoimen datan käyttö''.
+
+\subsection{Varusteet}
+Pelissä on erilaisia ostettavia tai kerättäviä varusteita, muunmuassa erilaisia
+aseita ja valonvahvistin, jolla pelaaja voi nähdä pimeässä parkkihallissa.
+
+Pelin aseet valittiin alkuperäisen Syndicate-pelin perusteella ja ne ovat:
+\begin{enumerate}
+    \item Pistooli
+    \item Haulikko
+    \item Konepistooli
+    \item Tarkkuuskivääri
+\end{enumerate}
+
+\section{Avoimen datan käyttö}
+Pelin parkkihalleja varten haetaan FinnParkin tarjoamasta rajapinnasta tietoja
+käyttämistämme parkkihalleista, muun muassa ovatko ne täynnä, mikä on niiden
+käyttötrendi (kasvava, vähenevä, ei muutosta) sekä onko halli suljettu vai auki.
+
+Sen perusteella onko halli täynnä ja mikä on sen käyttötrendi, muutetaan
+vihollisten ja resurssien määrää hallissa niin, että täysi on suurin mahdollinen
+määrä, jota seuraa kasvava, tätä vakaa ja pienin määrä vihollisia ja resursseja
+on kun trendi on vähenevä.
+
+Pelattaessa kysytään tietyin väliajoin rajapinnasta, onko parkkihalli suljettu.
+Jos parkkihalli on suljettu, ovat valot pois ja pelaajalla tulee olla
+valonvahvistin, jotta hän voi nähdä mitään.
+
+Jos havaitsemme ettei yksikään parkkihalli toteuta näitä ehtoja tarpeeksi usein
+jotta sillä olisi peliteknisesti merkitystä, saatetaan niitä muuttaa.
+
+\section{Tekninen toteutus}
+Parkkihallinäkymän maailma generoidaan käsin kirjoitetun karttatiedoston
+perusteella. Käytännössä karttatiedosto tulee olemaan ASCII-merkistöllä
+``piirretty'' pohjakuva parkkihallista, jossa tietty merkki vastaa tietynlaista
+elementtiä pelimaailmassa. Näin voimme helposti testata ja parannella kentän
+pelattavuutta.
+
+Kentän täyttämiseen käytetään ainakin yhtä kantaluokkaa ``entity''. Tällä luokalla
+on QPixmap sprite, sijainti sekä siirtämiseen ja sijoittamiseen tarkoitetut
+metodit. Tästä luokasta voi sitten periyttää pelielementtejä vihollisista 
+aseisiin.
+
+FinnParkin tarjoaman datan käsittelyyn tehdään itsenäinen kokonaisuus, mikä
+toimii järkevästi vaikkei pelin muuta koodia olisi edes olemassa. Mainittu
+kokonaisuus huolehtii datan tuoreudesta ilman liiallisia rajapintakyselyitä, ja
+tekee parkkihallien tilanteen kysymisestä pelikoodin puolella yksinkertaista.
+
+
+\section{Vastuualueet}
+
+Alustava vastuualuejako, jossa ensi
+
+\begin{enumerate}
+    \item Peliohjelmointi: Koko ryhmä (jaetaan pienempiä tehtäviä)
+    \item FinnPark-datan käyttö: Sakari
+    \item Juoni, hahmot ym.\ kehys: Sakari ja Esa
+    \item Grafiikka ym.\ visuaaliset seikat: Esa
+\end{enumerate}
+
+
+
+\end{document}

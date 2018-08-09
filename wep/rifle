@@ -1,0 +1,5 @@
+range: 15
+damage: 10
+falloff: 4
+dice: 1
+readable: kivääri

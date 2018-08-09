@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage[finnish]{babel}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Linux Libertine O}
+
+\begin{document}
+\title{Marjametsä park\\\small{Arvio ryhmän 32 pelistä}}
+\author{Sakari Saarinen, Lauri Haavisto, Esa Lakaniemi}
+\date{\today}
+\maketitle
+
+\tableofcontents 
+\newpage
+
+\section{Pelin arviointi}
+Saimme lopulta pelin toimimaan Qt:n versiolla 5.7.1. Tämän version mukana
+tullut Qt Creator näyttäisi asettavan oletustyöhakemiston eri tavalla
+aikaisempiin versioihin nähden. Relatiivinen viittaus ../configs/ ei tästä
+syystä toiminut.  Poistamalla configs-kansion tiedostostoviittauksista polun
+ja kopioimalla tiedostot main.cpp-tiedoston viereen peli löysi ne.
+
+Arvosteltuna versiona käytetty Release-buildia.
+
+\subsection{Hyvää}
+Kuten sanottu, karttanäkymä on visuaalisesti kaunis
+ja GPS-koordinaatteja on käytetty parkkihallien sijoittamiseen kartalla.
+Peli toimii sulavasti reaaliajassa. Tuhottomatkaan määrät luoteja ja
+vihollisia ruudulla eivät aiheuta hidastelua tai tökkimistä!  Parkkihallin,
+hahmojen ja ammusten grafiikka on uskottavan näköistä.  ParkData vaikuttaa
+kenttien ominaisuuksiin.  Valikot ovat siistit.  Pelissä voi ostaa aseita
+ja varusteita. Varusteiden ja aseiden hinta lasketaan nokkelasti niiden
+ominaisuuksista.  Rynnäkkökiväärin käyttö on hyvin tyydyttävää.
+Vihollisten tekoäly toimii hyvin.
+
+\subsection{Hassua}
+Tukijoukkojen liikkumista joutuu manipuloimaan usein, tai
+he jäävät kulmien taakse seisoskelemaan. Tällöin Laura itse jää usein
+joukkojensa taakse jumiin, ja eteneminen kentässä käy turhauttavan vaikeaksi.
+New Game näyttäisi alkavan määrällä 90 000 000 C rahaa. Tällä voi ostaa
+kaiken.  Kuolleet viholliset erottaa elävistä vain siitä, etteivät ne liiku.
+Laura koostuu pelkästään hiuksista.  Peli on loputon. Vain yksittäisissä
+parkkihalleissa voi voittaa, mutta ne voi pelata välittömästi uudelleen,
+kuin mitään ei olisi tapahtunut.
+
+\subsection{Huonoa}
+Laura voi jäädä tukijoukkojensa alle jumiin heti
+kentän alussa. Tällöin ei ole muuta mahdollisuutta kuin poistua hallista
+ja kokeilla uudelleen.  Sama kenttä generoituu aina erilaiseksi, joten
+mahdollisuudella valita mihin parkkihalliin menee, ei ole juuri merkitystä.
+Peli-ikkuna voi kadota taustalle pyörimään halli- ja karttanäkymän
+välissä, eikä ole helppoa tapaa tuoda sitä jälleen esille. Esimerkiksi
+ikonia ei muodostu tehtäväpalkkiin.  Peli jää joskus ikuiseen silmukkaan
+siirryttäessä halli- ja karttanäkymän välillä.  Pelin tallentaminen
+tyhjensi savedGame.xml tiedoston, ja peli kaatui.  Tukijoukkojen tekoälyssä
+on puutteita.
+
+\end{document}

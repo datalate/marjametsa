@@ -1,0 +1,5 @@
+range: 10
+damage: 2
+dice: 6
+falloff: 10
+readable: haulikko
